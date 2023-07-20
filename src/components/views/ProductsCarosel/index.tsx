@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ProductsCarosel = ({ProductData}: any) => {
   return (
     <div>{ProductData[0].productName}</div>
