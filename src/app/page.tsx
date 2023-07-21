@@ -1,6 +1,8 @@
 import BASE_PATH_FORAPI from "@/components/shared/Wrapper/BasePath";
 import { oneProductType, responseType } from "@/components/utils/ProductsDataArrayAndType";
 import Hero from "@/components/views/Hero";
+import Jewellery from "@/components/views/Jewellery";
+import Newsletter from "@/components/views/Newsletter";
 import ProductCarousel from "@/components/views/ProductsCarosel";
 import ProductsType from "@/components/views/ProductType";
 import { useEffect } from "react";
@@ -26,6 +28,8 @@ export default async function Home() {
       <Hero />
       <ProductsType />
       <ProductCarousel ProductData={result} />
+      <Jewellery/>
+      <Newsletter/>
     </div>
   )
 }
