@@ -1,6 +1,7 @@
 import heroGirlimg from '/public/header.webp'
 import { BsCart2 } from "react-icons/bs"
 import Image from "next/image"
+import Link from 'next/link'
 
 const Hero = () => {
     const btnText = "Start shopping";
@@ -22,9 +23,11 @@ const Hero = () => {
                     className="flex gap-3 items-center rounded-sm text-lg ring-1 ring-slate-800 bg-gray-800 text-white font-semibold py-3 px-5"
                 >
                     <BsCart2 />
+                <Link href={"/products"}>
                     <p className="whitespace-pre leading-4">
                         {btnText}
                     </p>
+                </Link>
                 </button>
                 <div className="flex gap-4">
                     <div className="w-14 md:w-28">

@@ -8,12 +8,12 @@ import Image from "next/image"
 import Link from "next/link"
 import Expand from "./subComponents/Expand"
 import { useRouter } from "next/navigation"
-// import ContextWrapper from "@/global/context"
-// import Cartstate from "./subComponents/Cartstate"
+import ContextWrapper from "@/global/context"
+import Cartstate from "./subComponents/Cartstate"
 
 
 const Navbar = () => {
-    // const router = useRouter();
+    const router = useRouter();
     const [isNavbarOpen, setNavbarOpen] = useState<boolean>(false);
     // const [searchQuery, setSearchQuery] = useState("");
 
@@ -25,7 +25,7 @@ const Navbar = () => {
     // }
 
     return (
-        // <ContextWrapper>
+        <ContextWrapper>
             <div className="sticky top-0 backdrop-blur-lg bg-gradient-to-tr from-white via-[#ffffffde] to-opacityDownColor z-20">
                 <div className="py-5 flex justify-between items-center gap-8">
                     <Link href="/" className="w-36 flex-shrink-0">
@@ -53,7 +53,7 @@ const Navbar = () => {
                             />
                         </div>
                         <Link href={"/cart"}>
-                            {/* <Cartstate /> */}
+                            <Cartstate />
                         </Link>
                     </div>
                     <div className="cursor-pointer" onClick={() => setNavbarOpen(!isNavbarOpen)}>
@@ -72,7 +72,7 @@ const Navbar = () => {
                     isNavbarOpen && <MobileNavbar />
                 }
             </div>
-        // </ContextWrapper>
+        </ContextWrapper>
     )
 }
 

@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import Navbar from '@/components/views/Navbar'
 import { Roboto } from 'next/font/google'
 import Footer from '@/components/views/Footer'
+import Wrapper from '@/components/shared/Wrapper'
 
 const inter = Roboto({ 
   subsets: ['latin'],
@@ -23,9 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar/>
-        {children}</body>
-        <Footer/>
+        <div className='overflow-hidden w-screen'>
+          {/* <TopLabel /> */}
+        </div>
+        <Wrapper>
+          <Navbar />
+          <div className='min-h-screen'>
+            {children}
+          </div>
+          <Footer />
+        </Wrapper>
+      </body>
     </html>
   )
 }

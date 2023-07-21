@@ -1,6 +1,6 @@
 "use client"
 import { ReactNode, createContext, useEffect, useReducer, useState } from "react";
-// import { cartReducer } from "../reducer";
+import { cartReducer } from "../reducer";
 // import { auth } from "@/lib/firebase";
 // import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useRouter } from "next/navigation";

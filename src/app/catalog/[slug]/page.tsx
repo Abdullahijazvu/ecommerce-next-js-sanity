@@ -1,7 +1,7 @@
 import BASE_PATH_FORAPI from "@/components/shared/Wrapper/BasePath"
 import { responseType, oneProductType } from "@/components/utils/ProductsDataArrayAndType"
-// import ProductDetail from "@/components/views/ProductDetail"
-// import ContextWrapper from "@/global/context"
+import ProductDetail from "@/components/views/ProductDetail"
+import ContextWrapper from "@/global/context"
 import { FC } from "react"
 import { Metadata } from 'next';
 
@@ -16,8 +16,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
         description: titleToSet.description,
     };
 }
-
-
 
 // fetch particular data of product using slug
 async function fetchPreviewData(slug: string) {
@@ -41,10 +39,9 @@ export async function generateStaticParams() {
 const Catalog = async ({ params }: { params: { slug: string } }) => {
     let data: responseType = await fetchPreviewData(params.slug)
     return (
-        // <ContextWrapper>
-        //     <ProductDetail item={data.result[0]} />
-        // </ContextWrapper>
-        <div>{params.slug}</div>
+        <ContextWrapper>
+        <div><ProductDetail item={data.result[0]} /></div>
+        </ContextWrapper>
     )
 }
 
