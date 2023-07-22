@@ -84,7 +84,7 @@ const MobileNavbar = () => {
             {
                 NavbarArray.map((item: NavbarItemType, index: number) => {
                     return (
-                        <ul className='dropdown-menu'>
+                        <ul className='dropdown-menu' key={index}>
                         <li>
                               <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/female/Female">Female</a>
                           </li>
