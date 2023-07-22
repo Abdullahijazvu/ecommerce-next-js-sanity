@@ -34,10 +34,6 @@ const Jewellery = () => {
                         <p className="text-lg leading-5">Lorem ipsum dolor sit amt, consectetur adipiscing elit.</p>
                     </div>
                 </div>
-
-
-
-
                 {/* right */}
                 <div className="flex flex-col lg:flex-row basis-1/2">
                     <div className="w-full px-4 lg:px-0 lg:w-80">
@@ -50,9 +46,6 @@ const Jewellery = () => {
                         <button className="text-white bg-gray-900 rounded-md py-2 px-6">See All Products</button>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     )

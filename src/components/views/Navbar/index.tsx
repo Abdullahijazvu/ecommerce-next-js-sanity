@@ -6,7 +6,6 @@ import { BiSearch } from "react-icons/bi"
 import { NavbarArray, NavbarItemType } from "@/components/utils/NavbarArrayAndTypes"
 import Image from "next/image"
 import Link from "next/link"
-import Expand from "./subComponents/Expand"
 import { useRouter } from "next/navigation"
 import ContextWrapper from "@/global/context"
 import Cartstate from "./subComponents/Cartstate"
@@ -26,10 +25,10 @@ const Navbar = () => {
 
     return (
         <ContextWrapper>
-            <div className="sticky top-0 backdrop-blur-lg bg-gradient-to-tr from-white via-[#ffffffde] to-opacityDownColor z-20">
-                <div className="py-5 flex justify-between items-center gap-8">
-                    <Link href="/" className="w-36 flex-shrink-0">
-                        <Image width={500} height={500} src={"/Logo.webp"} alt="Logo" />
+            <div className="sticky top-0 backdrop-blur-lg bg-gradient-to-tr from-white via-[#ffffffde] to-opacityDownColor z-20 max-w-7xl mx-auto px-4 md:px-10">
+                <div className="py-4 flex justify-between items-center gap-8">
+                    <Link href="/" className="flex-shrink-0">
+                        <Image width={1000} height={1000} src={"/Logo.webp"} alt="Logo" layout="responsive"/>
                     </Link>
                     <div className="hidden lg:flex justify-between items-center w-full">
                         <ul className="flex space-x-4 font-medium text-lg text-purple-950">
@@ -85,7 +84,20 @@ const MobileNavbar = () => {
             {
                 NavbarArray.map((item: NavbarItemType, index: number) => {
                     return (
-                        <Expand key={index} item={item} />
+                        <ul className='dropdown-menu'>
+                        <li>
+                              <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/female/Female">Female</a>
+                          </li>
+                          <li>
+                              <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/male/Male">Male</a>
+                          </li>
+                          <li>
+                              <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/kids">Kids</a>
+                          </li>
+                          <li>
+                              <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/products">All Products</a>
+                          </li>
+                      </ul>
                     )
                 })
             }

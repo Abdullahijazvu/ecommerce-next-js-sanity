@@ -28,7 +28,7 @@ const ProductCarousel: FC<{ ProductData: Array<oneProductType> }> = ({ ProductDa
         isDragging = false
     }
 
-    // mobile functions
+    // Mobile functions
     function mouseMovesForMobile(e: any) {
         if (!isDragging) return;
         if (tabBox) {
@@ -44,16 +44,16 @@ const ProductCarousel: FC<{ ProductData: Array<oneProductType> }> = ({ ProductDa
     let dataToItrate = ProductData.slice(0, 15);
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 py-20">
             <div className="text-center space-y-3">
-                <p className="text-blue-800 text-sm">PROMOTIONS</p>
-                <h3 className="text-3xl text-gray-800 font-bold">Our Promotions Events</h3>
+                <p className="text-blue-800 text-sm">Products</p>
+                <h3 className="text-3xl text-gray-800 font-bold">Featured Products</h3>
             </div>
             <div
                 onMouseMove={mouseMoves}
                 onMouseDown={mouseDown}
                 onMouseUp={mouseUp}
-                className="select-none flex gap-4 overflow-x-hidden scrollGrab py-4 overflow-y-hidden"
+                className="select-none flex gap-5 overflow-x-hidden scrollGrab py-4 overflow-y-hidden"
                 onTouchMove={mouseMovesForMobile}
                 onTouchStart={mouseDownForMobile}
                 onTouchEnd={mouseUp}

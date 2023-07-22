@@ -2,7 +2,7 @@ import Image from "next/image"
 
 const ProductsType = () => {
   return (
-    <div className="py-16 px-10 space-y-5">
+    <div className="py-16 space-y-5">
 
       {/* Heading */}
       <div className="text-center space-y-3">

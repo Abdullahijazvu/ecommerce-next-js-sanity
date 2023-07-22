@@ -27,13 +27,13 @@ export default function RootLayout({
         <div className='overflow-hidden w-screen'>
           {/* <TopLabel /> */}
         </div>
-        <Wrapper>
           <Navbar />
+        <Wrapper>
           <div className='min-h-screen'>
             {children}
           </div>
-          <Footer />
         </Wrapper>
+        <Footer />
       </body>
     </html>
   )

@@ -16,18 +16,16 @@ function urlFor(source: any) {
 }
 
 const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
-  let { cartArray, userData, dispatch } = useContext(cartContext)
+  let { cartArray, dispatch } = useContext(cartContext)
   const [imageForPreviewOfSelected, setImageForPreviewOfSelected] = useState<string>(item.image[0]._key);
   const [quantity, setQuantity] = useState(1);
 
   function handleAddToCart() {
     let isExsits = cartArray.some((elem: any) => elem.product_id === item._id);
 
-    if (userData) {
       let dataToAddInCart = {
         product_id: item._id,
         quantity: quantity,
-        user_id: userData.uuid,
         price:item.price,
       };
       if (!isExsits) {
@@ -36,8 +34,7 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
         dispatch("updateCart", dataToAddInCart)
       }
       notification(item.productName);
-    }
-  };
+    } 
 
   function incrementTheQuantity() {
     setQuantity(quantity + 1);
