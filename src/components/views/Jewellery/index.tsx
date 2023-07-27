@@ -3,16 +3,13 @@ import Image from "next/image"
 const Jewellery = () => {
     return (
         <div className="px-1 text-gray-700">
-
             {/* top */}
             <div className="flex justify-start md:justify-end text-4xl md:text-5xl font-bold py-4 ">
                 <h6 className="max-w-[27rem]">Unique and Authentic Vintage Designer Jewellery</h6>
             </div>
-
             {/* bottom */}
             <div className="flex flex-col md:flex-row justify-between py-4 mt-2 gap-5">
                 {/* left */}
-
                 <div className="relative basis-1/2  gap-6 lg:gap-10 grid grid-cols-2 grid-rows-2">
                     <div className="absolute -z-50 text-slate-200 inset-0">
                         <h6 className="text-5xl md:text-7xl lg:text-[7.3rem] leading-[5.9rem] font-bold">Different from others</h6>

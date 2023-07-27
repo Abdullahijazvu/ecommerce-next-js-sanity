@@ -21,28 +21,40 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
 
   function handleAddToCart() {
-    let isExsits = cartArray.some((elem: any) => elem.product_id === item._id);
+    // let isExsits = cartArray.some((elem: any) => elem.product_id === item._id);
 
       let dataToAddInCart = {
         product_id: item._id,
         quantity: quantity,
         price:item.price,
       };
-      if (!isExsits) {
-        dispatch("addToCart", dataToAddInCart);
-      }else{
-        dispatch("updateCart", dataToAddInCart)
-      }
-      notification(item.productName);
+      dispatch({payload: "addToCart", data: dataToAddInCart})
+      notification(item.productName)
+      // if (!isExsits) {
+      //   dispatch("addToCart", dataToAddInCart);
+      // }else{
+      //   dispatch("updateCart", dataToAddInCart)
+      // }
+      // notification(item.productName);
     } 
 
   function incrementTheQuantity() {
     setQuantity(quantity + 1);
+    // let dataToAddInCart = {
+    //   productId: item._id,
+    //   quantity: quantity
+    // };
+    // dispatch({payload: "updatetoCart", data: dataToAddInCart})
   };
 
   function decrementTheQuantity() {
     if (quantity !== 0) {
       setQuantity(quantity - 1);
+      // let dataToAddInCart = {
+      //   productId: item._id,
+      //   quantity: quantity
+      // };
+      // dispatch({payload: "updatetoCart", data: dataToAddInCart})
     }
   };
 

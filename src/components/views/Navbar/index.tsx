@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation"
 import ContextWrapper from "@/global/context"
 import Cartstate from "./subComponents/Cartstate"
 
-
 const Navbar = () => {
     const router = useRouter();
     const [isNavbarOpen, setNavbarOpen] = useState<boolean>(false);
@@ -74,9 +73,7 @@ const Navbar = () => {
         </ContextWrapper>
     )
 }
-
 export default Navbar
-
 
 const MobileNavbar = () => {
     return (
@@ -85,18 +82,18 @@ const MobileNavbar = () => {
                 NavbarArray.map((item: NavbarItemType, index: number) => {
                     return (
                         <ul className='dropdown-menu' key={index}>
-                        <li>
-                              <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/female/Female">Female</a>
-                          </li>
-                          <li>
-                              <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/male/Male">Male</a>
-                          </li>
-                          <li>
-                              <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/kids">Kids</a>
-                          </li>
-                          <li>
-                              <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/products">All Products</a>
-                          </li>
+                            <li>
+                                <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/female/Female">Female</a>
+                            </li>
+                            <li>
+                                <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/male/Male">Male</a>
+                            </li>
+                            <li>
+                                <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/kids">Kids</a>
+                            </li>
+                            <li>
+                                <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/products">All Products</a>
+                            </li>
                       </ul>
                     )
                 })

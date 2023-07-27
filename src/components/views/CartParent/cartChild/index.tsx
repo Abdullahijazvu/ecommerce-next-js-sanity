@@ -23,8 +23,8 @@ const notificationError = (title: string) => {
 };
 
 const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProductType> }) => {
-    const [loadings, setLoadings] = useState<boolean>(false);
-    const [allProductsForCart, setAllProductsForCart] = useState<any>();
+    // const [loadings, setLoadings] = useState<boolean>(false);
+    const [allProductsForCart, setAllProductsForCart] = useState<any>([]);
     let { userData, cartArray, dispatch, loading, setLoading } = useContext(cartContext)
     const [totalPrice, setTotalPrice] = useState(0);
     let router = useRouter();
@@ -46,86 +46,86 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
     }, [allProductsForCart])
 
 
-    function handleRemove(product_id: string) {
-        if (userData) {
-            let user_id = userData.uuid;
-            dispatch("removeFromCart", { product_id, user_id });
-        }
-    }
-    useEffect(() => {
-        if (cartArray) {
-            let data = allProductsOfStore.filter((item: oneProductType) => {
-                for (let index = 0; index < cartArray.length; index++) {
-                    let element: any = cartArray[index];
-                    if (element.product_id === item._id && element.user_id === userData.uuid) {
-                        return true
-                    };
-                };
-            });
-            let updatedData = data.map((elem: oneProductType) => {
-                for (let index = 0; index < cartArray.length; index++) {
-                    let element: any = cartArray[index];
-                    if (element.product_id === elem._id) {
-                        return {
-                            ...elem,
-                            quantity: element.quantity,
-                        }
-                    };
-                };
-            })
-            setAllProductsForCart(updatedData);
-        }
+    // function handleRemove(product_id: string) {
+    //     if (userData) {
+    //         let user_id = userData.uuid;
+    //         dispatch("removeFromCart", { product_id, user_id });
+    //     }
+    // }
+    // useEffect(() => {
+    //     if (cartArray) {
+    //         let data = allProductsOfStore.filter((item: oneProductType) => {
+    //             for (let index = 0; index < cartArray.length; index++) {
+    //                 let element: any = cartArray[index];
+    //                 if (element.product_id === item._id && element.user_id === userData.uuid) {
+    //                     return true
+    //                 };
+    //             };
+    //         });
+    //         let updatedData = data.map((elem: oneProductType) => {
+    //             for (let index = 0; index < cartArray.length; index++) {
+    //                 let element: any = cartArray[index];
+    //                 if (element.product_id === elem._id) {
+    //                     return {
+    //                         ...elem,
+    //                         quantity: element.quantity,
+    //                     }
+    //                 };
+    //             };
+    //         })
+    //         setAllProductsForCart(updatedData);
+    //     }
 
-    }, [cartArray]);
+    // }, [cartArray]);
 
-    async function handleDecrementByOne(product_id: string, price: any) {
-        let stableQuantity: number = 0;
-        cartArray.forEach((element: any) => {
-            if (element.product_id == product_id) {
-                stableQuantity = element.quantity
-            }
-        });
+    // async function handleDecrementByOne(product_id: string, price: any) {
+    //     let stableQuantity: number = 0;
+    //     cartArray.forEach((element: any) => {
+    //         if (element.product_id == product_id) {
+    //             stableQuantity = element.quantity
+    //         }
+    //     });
 
-        if (stableQuantity - 1 <= 0) {
-            notificationError("Did not accept lower than 1")
-        } else {
-            await dispatch("updateCart", {
-                product_id: product_id,
-                quantity: stableQuantity - 1,
-                user_id: userData.uuid,
-                price: price,
-            });
-            notificationError("Decremented by One")
-        }
-    }
-    async function handleIncrementByOne(product_id: string, price: any) {
-        let stableQuantity: number = 0;
-        cartArray.forEach((element: any) => {
-            if (element.product_id == product_id) {
-                stableQuantity = element.quantity
-            }
-        });
-        let returnedVal = await dispatch("updateCart", {
-            product_id: product_id,
-            quantity: stableQuantity + 1,
-            user_id: userData.uuid,
-            price: price,
-        });
-        notificationError("Incremented by One");
-    }
+    //     if (stableQuantity - 1 <= 0) {
+    //         notificationError("Did not accept lower than 1")
+    //     } else {
+    //         await dispatch("updateCart", {
+    //             product_id: product_id,
+    //             quantity: stableQuantity - 1,
+    //             user_id: userData.uuid,
+    //             price: price,
+    //         });
+    //         notificationError("Decremented by One")
+    //     }
+    // }
+    // async function handleIncrementByOne(product_id: string, price: any) {
+    //     let stableQuantity: number = 0;
+    //     cartArray.forEach((element: any) => {
+    //         if (element.product_id == product_id) {
+    //             stableQuantity = element.quantity
+    //         }
+    //     });
+    //     let returnedVal = await dispatch("updateCart", {
+    //         product_id: product_id,
+    //         quantity: stableQuantity + 1,
+    //         user_id: userData.uuid,
+    //         price: price,
+    //     });
+    //     notificationError("Incremented by One");
+    // }
 
-    async function handleProcessCheckout() {
-        setLoadings(true);
-        let linkOrg: any = await fetch(`/api/checkout_sessions`, {
-            method: "POST",
-            body: JSON.stringify(allProductsForCart)
-        })
-        if (linkOrg) {
-            let { link } = await linkOrg.json()
-            window.location.href = link
-        }
-        setLoadings(false);
-    }
+    // async function handleProcessCheckout() {
+    //     setLoadings(true);
+    //     let linkOrg: any = await fetch(`/api/checkout_sessions`, {
+    //         method: "POST",
+    //         body: JSON.stringify(allProductsForCart)
+    //     })
+    //     if (linkOrg) {
+    //         let { link } = await linkOrg.json()
+    //         window.location.href = link
+    //     }
+    //     setLoadings(false);
+    // }
 
     return (
         <div className="py-10 px-4 md:px-10">
@@ -146,18 +146,18 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                 <div className="space-y-1 md:space-y-3 w-full">
                                     <div className="flex justify-between">
                                         <h2 className="md:text-2xl font-light text-gray-700">{item.productName}</h2>
-                                        {loading ? <LoadingComp size={"w-10"} /> :
+                                        {/* {loading ? <LoadingComp size={"w-10"} /> :
                                             <div className="cursor-pointer" onClick={() => handleRemove(item._id)}>
                                                 <RiDeleteBin6Line size={28} />
                                             </div>
-                                        }
+                                        } */}
                                     </div>
                                     <p className="text-gray-400 font-medium">{item.productTypes[1] ? item.productTypes[1] : "All"}</p>
                                     <h3 className="text-sm md:text-base">Delivery Estimation</h3>
                                     <h4 className="text-orange-400 font-semibold md:text-xl">5 Working Days</h4>
                                     <div className="flex justify-between">
                                         <p className="font-semibold md:text-lg">{"$"}{item.price}</p>
-                                        <div className={`flex gap-2 ${loading ? "opacity-25" : "opacity-100"} items-center text-lg`}>
+                                        {/* <div className={`flex gap-2 ${loading ? "opacity-25" : "opacity-100"} items-center text-lg`}>
                                             <button
                                                 onClick={() => handleDecrementByOne(item._id, item.price)}
                                                 className="select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-gray-200">
@@ -171,7 +171,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                             >
                                                 +
                                             </button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -205,18 +205,18 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                     <h6 className="font-semibold text-xl">Order Summary</h6>
                     <div className="flex justify-between">
                         <p className="text-lg font-light">Quantity:</p>
-                        <p>{cartArray.length} Products</p>
+                        {/* <p>{cartArray.length} Products</p> */}
                     </div>
                     <div className="flex justify-between">
                         <p className="text-lg font-light">Subtotal:</p>
-                        <p>${totalPrice}</p>
+                        {/* <p>${totalPrice}</p> */}
                     </div>
                     <button
-                        onClick={handleProcessCheckout}
+                        // onClick={handleProcessCheckout}
                         className="text-white bg-gray-900 border border-gray-500 px-4 py-2 w-full">
-                        {loadings ? "Loading..." :
+                        {/* {loadings ? "Loading..." :
                             "Process to Checkout"
-                        }
+                        } */}
                     </button>
                 </div>
             </div>
