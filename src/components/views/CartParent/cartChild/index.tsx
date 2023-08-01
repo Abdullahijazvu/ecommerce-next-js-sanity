@@ -23,8 +23,8 @@ const notificationError = (title: string) => {
 };
 
 const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProductType> }) => {
-    // const [loadings, setLoadings] = useState<boolean>(false);
-    const [allProductsForCart, setAllProductsForCart] = useState<any>([]);
+    const [loadings, setLoadings] = useState<boolean>(false);
+    const [allProductsForCart, setAllProductsForCart] = useState<any>();
     let { userData, cartArray, dispatch, loading, setLoading } = useContext(cartContext)
     const [totalPrice, setTotalPrice] = useState(0);
     let router = useRouter();
@@ -46,37 +46,37 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
     }, [allProductsForCart])
 
 
-    // function handleRemove(product_id: string) {
-    //     if (userData) {
-    //         let user_id = userData.uuid;
-    //         dispatch("removeFromCart", { product_id, user_id });
-    //     }
-    // }
-    // useEffect(() => {
-    //     if (cartArray) {
-    //         let data = allProductsOfStore.filter((item: oneProductType) => {
-    //             for (let index = 0; index < cartArray.length; index++) {
-    //                 let element: any = cartArray[index];
-    //                 if (element.product_id === item._id && element.user_id === userData.uuid) {
-    //                     return true
-    //                 };
-    //             };
-    //         });
-    //         let updatedData = data.map((elem: oneProductType) => {
-    //             for (let index = 0; index < cartArray.length; index++) {
-    //                 let element: any = cartArray[index];
-    //                 if (element.product_id === elem._id) {
-    //                     return {
-    //                         ...elem,
-    //                         quantity: element.quantity,
-    //                     }
-    //                 };
-    //             };
-    //         })
-    //         setAllProductsForCart(updatedData);
-    //     }
+    function handleRemove(product_id: string) {
+        if (userData) {
+            let user_id = userData.uuid;
+            dispatch("removeFromCart", { product_id, user_id });
+        }
+    }
+    useEffect(() => {
+        if (cartArray) {
+            let data = allProductsOfStore.filter((item: oneProductType) => {
+                for (let index = 0; index < cartArray.length; index++) {
+                    let element: any = cartArray[index];
+                    if (element.product_id === item._id && element.user_id === userData.uuid) {
+                        return true
+                    };
+                };
+            });
+            let updatedData = data.map((elem: oneProductType) => {
+                for (let index = 0; index < cartArray.length; index++) {
+                    let element: any = cartArray[index];
+                    if (element.product_id === elem._id) {
+                        return {
+                            ...elem,
+                            quantity: element.quantity,
+                        }
+                    };
+                };
+            })
+            setAllProductsForCart(updatedData);
+        }
 
-    // }, [cartArray]);
+    }, [cartArray]);
 
     // async function handleDecrementByOne(product_id: string, price: any) {
     //     let stableQuantity: number = 0;
@@ -146,32 +146,32 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                 <div className="space-y-1 md:space-y-3 w-full">
                                     <div className="flex justify-between">
                                         <h2 className="md:text-2xl font-light text-gray-700">{item.productName}</h2>
-                                        {/* {loading ? <LoadingComp size={"w-10"} /> :
+                                        {loading ? <LoadingComp size={"w-10"} /> :
                                             <div className="cursor-pointer" onClick={() => handleRemove(item._id)}>
                                                 <RiDeleteBin6Line size={28} />
                                             </div>
-                                        } */}
+                                        }
                                     </div>
                                     <p className="text-gray-400 font-medium">{item.productTypes[1] ? item.productTypes[1] : "All"}</p>
                                     <h3 className="text-sm md:text-base">Delivery Estimation</h3>
                                     <h4 className="text-orange-400 font-semibold md:text-xl">5 Working Days</h4>
                                     <div className="flex justify-between">
                                         <p className="font-semibold md:text-lg">{"$"}{item.price}</p>
-                                        {/* <div className={`flex gap-2 ${loading ? "opacity-25" : "opacity-100"} items-center text-lg`}>
-                                            <button
+                                        <div className={`flex gap-2 ${loading ? "opacity-25" : "opacity-100"} items-center text-lg`}>
+                                            {/* <button
                                                 onClick={() => handleDecrementByOne(item._id, item.price)}
                                                 className="select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-gray-200">
                                                 -
-                                            </button>
+                                            </button> */}
                                             <p>{item.quantity}</p>
-                                            <button
+                                            {/* <button
                                                 onClick={() => handleIncrementByOne(item._id, item.price)}
                                                 disabled={loading}
                                                 className="border select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full  border-gray-800"
                                             >
                                                 +
-                                            </button>
-                                        </div> */}
+                                            </button> */}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -179,8 +179,8 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                     }) :
                         // !userData ? (
                         //     <div className="text-center font-semibold text-gray-800 text-xl">Please login First</div>
-                        // )
-                         
+                        // ) 
+                        
                             arrayForLoading.map((index: number) => (
                                 <div key={index} className="border border-blue-300 shadow rounded-md p-4 w-full mx-auto">
                                     <div className="flex animate-pulse gap-4">
@@ -199,30 +199,31 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                     </div>
                                 </div>
                             ))
-                    }
+                        }
                 </div>
                 <div className="basis-1/4 space-y-6 px-6">
                     <h6 className="font-semibold text-xl">Order Summary</h6>
                     <div className="flex justify-between">
                         <p className="text-lg font-light">Quantity:</p>
-                        {/* <p>{cartArray.length} Products</p> */}
+                        <p>{cartArray.length} Products</p>
                     </div>
                     <div className="flex justify-between">
                         <p className="text-lg font-light">Subtotal:</p>
-                        {/* <p>${totalPrice}</p> */}
+                        <p>${totalPrice}</p>
                     </div>
                     <button
                         // onClick={handleProcessCheckout}
                         className="text-white bg-gray-900 border border-gray-500 px-4 py-2 w-full">
-                        {/* {loadings ? "Loading..." :
+                        {loadings ? "Loading..." :
                             "Process to Checkout"
-                        } */}
+                        }
                     </button>
                 </div>
             </div>
         </div>
     )
 }
+
 export default CartComp
 
 let arrayForLoading = [1, 2, 3, 4]

@@ -16,7 +16,7 @@ function urlFor(source: any) {
 }
 
 const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
-  let { cartArray, dispatch } = useContext(cartContext)
+  let { state, dispatch } = useContext(cartContext)
   const [imageForPreviewOfSelected, setImageForPreviewOfSelected] = useState<string>(item.image[0]._key);
   const [quantity, setQuantity] = useState(1);
 
@@ -26,9 +26,10 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
       let dataToAddInCart = {
         product_id: item._id,
         quantity: quantity,
-        price:item.price,
+        user_id: "userId"
+        // price:item.price,
       };
-      dispatch({payload: "addToCart", data: dataToAddInCart})
+      dispatch("addToCart", dataToAddInCart)
       notification(item.productName)
       // if (!isExsits) {
       //   dispatch("addToCart", dataToAddInCart);
@@ -139,7 +140,6 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
             <p className="text-2xl font-semibold">${item.price}{".00"}</p>
           </div>
         </div>
-
       </div>
       <div>
         <div className="relative py-14 px-2 border-b border-gray-400">
