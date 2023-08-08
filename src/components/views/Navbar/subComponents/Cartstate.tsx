@@ -10,9 +10,9 @@ const Cartstate = () => {
 
     useEffect(()=>{
         let data = localStorage.getItem("cart") as string
-        setQuantity(JSON.parse(data).length)
-        console.log("Data: ", data);      
-        console.log("JSON Data: ", JSON.parse(data));
+        setQuantity(JSON.parse(data)?.length ? JSON.parse(data)?.length : 0 )
+        // console.log("Data: ", data);      
+        // console.log("JSON Data: ", JSON.parse(data));
     }, [])
 
     if(isBrowser()){

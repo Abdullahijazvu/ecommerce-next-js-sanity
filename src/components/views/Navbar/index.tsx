@@ -1,7 +1,7 @@
 "use client"
 import { IoMdClose } from "react-icons/io"
 import { GiHamburgerMenu } from "react-icons/gi"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BiSearch } from "react-icons/bi"
 import { NavbarArray, NavbarItemType } from "@/components/utils/NavbarArrayAndTypes"
 import Image from "next/image"
@@ -9,6 +9,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import ContextWrapper from "@/global/context"
 import Cartstate from "./subComponents/Cartstate"
+import {v4 as uuidv4} from 'uuid'
 
 const Navbar = () => {
     const router = useRouter();
@@ -21,6 +22,15 @@ const Navbar = () => {
     //         router.push(`/search/${searchQuery}`);
     //     }
     // }
+    useEffect(()=>{
+    let user_id:any = window.localStorage.getItem('user_id');
+    if(!user_id){
+        user_id = uuidv4();
+        window.localStorage.setItem('user_id',user_id);
+    }
+    window.userid = user_id;
+    console.log('user_id: ', window.userid)
+    },[])
 
     return (
         <ContextWrapper>

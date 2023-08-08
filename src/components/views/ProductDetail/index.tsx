@@ -8,6 +8,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import { BsCart2 } from "react-icons/bs";
 import { cartContext } from "@/global/context";
 import PortableText from "react-portable-text";
+import { v4 as uuidv4 } from 'uuid';
 
 const builder: any = imageUrlBuilder(client);
 
@@ -21,41 +22,24 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
 
   function handleAddToCart() {
-    // let isExsits = cartArray.some((elem: any) => elem.product_id === item._id);
 
       let dataToAddInCart = {
         product_id: item._id,
         quantity: quantity,
-        user_id: "userId"
-        // price:item.price,
+        user_id: window.userid,
+      
       };
-      dispatch("addToCart", dataToAddInCart)
+      dispatch("addToCart", dataToAddInCart,dataToAddInCart.user_id)
       notification(item.productName)
-      // if (!isExsits) {
-      //   dispatch("addToCart", dataToAddInCart);
-      // }else{
-      //   dispatch("updateCart", dataToAddInCart)
-      // }
-      // notification(item.productName);
-    } 
+    }   
 
   function incrementTheQuantity() {
     setQuantity(quantity + 1);
-    // let dataToAddInCart = {
-    //   productId: item._id,
-    //   quantity: quantity
-    // };
-    // dispatch({payload: "updatetoCart", data: dataToAddInCart})
   };
 
   function decrementTheQuantity() {
     if (quantity !== 0) {
       setQuantity(quantity - 1);
-      // let dataToAddInCart = {
-      //   productId: item._id,
-      //   quantity: quantity
-      // };
-      // dispatch({payload: "updatetoCart", data: dataToAddInCart})
     }
   };
 

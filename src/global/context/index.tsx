@@ -12,6 +12,7 @@ interface indexForError {
     [key: string]: string
 };
 
+
 const ContextWrapper = ({ children }: { children: ReactNode }) => {
     let router = useRouter();
     const [userData, setUserData] = useState<any>();
@@ -19,10 +20,14 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
     const [loading, setLoading] = useState(false);
     const [cartArray, setCartArray] = useState<any>([]);
     // const [errorsOfFirebase, setErrorsOfFirebase] = useState({
-    //     key: "",
-    //     errorMessage: "",
-    // });
-    const [quantity, setQuantity] = useState(0);
+        //     key: "",
+        //     errorMessage: "",
+        // });
+    const [quantity, setQuantity] = useState(1);
+    // const initializerofCart = {
+    //         cart: [],
+    //     }
+    // const [state, dispatch] = useReducer(cartReducer, initializerofCart)
 
     useEffect(() => {
         if (cartArray.length !== 0) {
@@ -31,52 +36,101 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
     }, [cartArray])
 
     async function fetchApiForAllCartItems() {
-        if (userData) {
-            let res = await fetch(`/api/cartfunc?user_id=${userData.uuid}`);
-            if (!res.ok) {
-                throw new Error("Failed to Fetch")
-            }
-            let dataToreturn = await res.json();
-            await setCartArray((prev: any) => dataToreturn.allCartData);
-            router.refresh();
-            if (dataToreturn) {
-                return true
-            }
+        let res = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc?user_id=` + window.userid)
+        if(!res.ok){
+            throw new Error("Faild to fetch")
         }
+        let datatoreturn = await res.json()
+        setCartArray(datatoreturn.allCartData)
     }
 
     useEffect(() => {
-        fetchApiForAllCartItems();
-    }, [userData]);
-
-    async function dispatch(payload: string, data: any) {
+            fetchApiForAllCartItems();
+    }, []);
+    console.log("cartArray: ",cartArray);
+    
+    async function dispatch(payload: string, data: any, user_id: any) {
         if (payload === "addToCart") {
             console.log("func running of add to cart");
-            await fetch(`/api/cartfunc`, {
+            await fetch(`${BASE_PATH_FORAPI}/api/cartfunc`, {
                 method: "POST",
                 body: JSON.stringify(data)
             });
-        } else if (payload === "removeFromCart") {
-            let dataa = await fetch(`/api/cartfunc?product_id=${data.product_id}&user_id=${data.user_id}`, {
+        }
+        else if (payload === "removeFromCart") {
+            console.log("func running of remove to cart", data);
+            let dataa = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc?product_id=${data.product_id}&user_id=${data.user_id}`, {
                 method: "DELETE",
             });
             let NotData = await dataa.json();
-        } else if (payload === "updateCart") {
-            setLoading(true);
-            let dataa = await fetch(`/api/cartfunc`, {
-                method: "PUT",
-                body: JSON.stringify(data)
-            });
-            let NotData = await dataa.json();
-            setLoading(false);
-        }
-        let resp = await fetchApiForAllCartItems();
-        if (resp) {
-            return "Success"
-        } else {
-            return "Unsuccess"
-        }
+            console.log(NotData);
+        } 
+        fetchApiForAllCartItems()
     };
+        // else if (payload === "updateCart") {
+        //     setLoading(true);
+        //     let dataa = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc`, {
+        //         method: "PUT",
+        //         body: JSON.stringify(data)
+        //     });
+        //     let NotData = await dataa.json();
+        //     setLoading(false);
+        // }
+        // let resp = await fetchApiForAllCartItems();
+        // if (resp) {
+        //     return "Success"
+        // } else {
+        //     return "Unsuccess"
+        // }
+
+
+    // async function fetchApiForAllCartItems() {
+    //     if (userData) {
+    //         let res = await fetch(`/api/cartfunc?user_id=${userData.uuid}`);
+    //         if (!res.ok) {
+    //             throw new Error("Failed to Fetch")
+    //         }
+    //         let dataToreturn = await res.json();
+    //         await setCartArray((prev: any) => dataToreturn.allCartData);
+    //         router.refresh();
+    //         if (dataToreturn) {
+    //             return true
+    //         }
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     fetchApiForAllCartItems();
+    // }, [userData]);
+
+    // async function dispatch(payload: string, data: any) {
+    //     if (payload === "addToCart") {
+    //         console.log("func running of add to cart");
+    //         await fetch(`/api/cartfunc`, {
+    //             method: "POST",
+    //             body: JSON.stringify(data)
+    //         });
+    //     } else if (payload === "removeFromCart") {
+    //         let dataa = await fetch(`/api/cartfunc?product_id=${data.product_id}&user_id=${data.user_id}`, {
+    //             method: "DELETE",
+    //         });
+    //         let NotData = await dataa.json();
+    //     } else if (payload === "updateCart") {
+    //         setLoading(true);
+    //         let dataa = await fetch(`/api/cartfunc`, {
+    //             method: "PUT",
+    //             body: JSON.stringify(data)
+    //         });
+    //         let NotData = await dataa.json();
+    //         setLoading(false);
+    //     }
+    //     let resp = await fetchApiForAllCartItems();
+    //     if (resp) {
+    //         return "Success"
+    //     } else {
+    //         return "Unsuccess"
+    //     }
+    // };
 
     // let user = auth.currentUser;
 
