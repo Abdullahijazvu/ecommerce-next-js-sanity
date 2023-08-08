@@ -65,23 +65,26 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
             let NotData = await dataa.json();
             console.log(NotData);
         } 
-        fetchApiForAllCartItems()
-    };
-        // else if (payload === "updateCart") {
-        //     setLoading(true);
-        //     let dataa = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc`, {
-        //         method: "PUT",
-        //         body: JSON.stringify(data)
-        //     });
-        //     let NotData = await dataa.json();
-        //     setLoading(false);
-        // }
+        else if (payload === "updateCart") {
+            console.log("new quantity", data);
+            // setLoading(true);
+            let dataa = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc`, {
+                method: "PUT",
+                body: JSON.stringify(data)
+            });
+            let NotData = await dataa.json();
+            console.log("func running of update cart", NotData);
+            // setLoading(false);
+        }
         // let resp = await fetchApiForAllCartItems();
         // if (resp) {
         //     return "Success"
         // } else {
         //     return "Unsuccess"
         // }
+        
+        fetchApiForAllCartItems()
+    }
 
 
     // async function fetchApiForAllCartItems() {

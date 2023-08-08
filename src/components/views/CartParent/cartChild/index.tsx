@@ -33,11 +33,11 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
 
     useEffect(() => {
         if (cartArray.length !== 0) {
-            const cartData = cartArray.filter((value, index, array) => {
-                if(array.indexOf(value) === index){
-                    // retrun true;
-                }
-            });
+            // const cartData = cartArray.filter((value, index, array) => {
+            //     if(array.indexOf(value) === index){
+            //         // retrun true;
+            //     }
+            // });
             
             let data = allProductsOfStore.filter((item: oneProductType, currentIndex:number) => {
                 for (let index = 0; index < cartArray.length; index++) {
@@ -78,7 +78,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
         dispatch("removeFromCart", { product_id, user_id });
     }
     useEffect(() => {
-        if (cartArray) {
+        if (cartArray.length !== 0 ) {
             let data = allProductsOfStore.filter((item: oneProductType) => {
                 for (let index = 0; index < cartArray.length; index++) {
                     let element: any = cartArray[index];
@@ -87,18 +87,14 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                     };
                 };
             });
-            let updatedData = data.map((elem: oneProductType) => {
-                for (let index = 0; index < cartArray.length; index++) {
-                    let element: any = cartArray[index];
-                    if (element.product_id === elem._id) {
-                        return {
-                            ...elem,
-                            quantity: element.quantity,
-                        }
-                    };
-                };
-            })
-            setAllProductsForCart(updatedData);
+            setAllProductsForCart(data)
+            for (let index = 0; index < cartArray.length; index++) {
+                const element = cartArray[index];
+                    let subTotalPrice = element.quantity * element.price
+                    if(subTotalPrice){
+                        setTotalPrice(totalPrice+subTotalPrice)
+                    }
+            }
         }
     }, [cartArray]);
 
@@ -115,9 +111,12 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
         } else {
             await dispatch("updateCart", {
                 product_id: product_id,
-                quantity: stableQuantity - 1
+                quantity: stableQuantity - 1,
+                user_id: window.userid,
+                price: price
             });
             notificationError("Decremented by One")
+            PriceSubTotal()
         }
     }
     async function handleIncrementByOne(product_id: string, price: any) {
@@ -127,11 +126,16 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                 stableQuantity = element.quantity
             }
         });
-        let returnedVal = await dispatch("updateCart", {
+        console.log("previous quantity", stableQuantity);
+        
+        await dispatch("updateCart", {
             product_id: product_id,
-            quantity: stableQuantity + 1,            
+            quantity: stableQuantity + 1,
+            user_id: window.userid,
+            price:price
         });
         notificationError("Incremented by One");
+        PriceSubTotal()
     }
 
     async function handleProcessCheckout() {
@@ -184,7 +188,20 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                                 className="select-none cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-gray-200">
                                                 -
                                             </button>
-                                            <p>{item.quantity}</p>
+                                            {/* <p>{item.quantity}</p> */}
+                                            <p>
+                                                {
+                                                    cartArray.map((subItem:any)=>{
+                                                        let matching = subItem.product_id === item._id
+                                                        let quantity = subItem.quantity
+                                                        if(matching){
+                                                            return quantity
+                                                        } else{
+                                                            return ""
+                                                        }
+                                                    })
+                                                }
+                                            </p>
                                             <button
                                                 onClick={() => handleIncrementByOne(item._id, item.price)}
                                                 disabled={loading}

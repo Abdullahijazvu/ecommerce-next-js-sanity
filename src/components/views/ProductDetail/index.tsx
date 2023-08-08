@@ -17,21 +17,28 @@ function urlFor(source: any) {
 }
 
 const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
-  let { state, dispatch } = useContext(cartContext)
+  let { cartArray, state, dispatch } = useContext(cartContext)
   const [imageForPreviewOfSelected, setImageForPreviewOfSelected] = useState<string>(item.image[0]._key);
   const [quantity, setQuantity] = useState(1);
 
   function handleAddToCart() {
-
-      let dataToAddInCart = {
+    let isExists = cartArray.some((elem:any)=>elem.product_id===item._id)
+    console.log(isExists);
+    
+    let dataToAddInCart = {
         product_id: item._id,
         quantity: quantity,
         user_id: window.userid,
-      
+        price: item.price
       };
-      dispatch("addToCart", dataToAddInCart,dataToAddInCart.user_id)
+      if(!isExists){
+        dispatch("addToCart", dataToAddInCart)
+        // dispatch("addToCart", dataToAddInCart,dataToAddInCart.user_id)
+      }else{
+        dispatch("updateCart", dataToAddInCart)
+      }
       notification(item.productName)
-    }   
+    }
 
   function incrementTheQuantity() {
     setQuantity(quantity + 1);
