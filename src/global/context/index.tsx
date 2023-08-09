@@ -49,8 +49,7 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
             fetchApiForAllCartItems();
-    }, []);
-    console.log("cartArray: ",cartArray);
+    }, [userData]);
     
     async function dispatch(payload: string, data: any, user_id: any) {
         if (payload === "addToCart") {
@@ -85,10 +84,7 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
         } else {
             return "Unsuccess"
         }
-        
-        fetchApiForAllCartItems()
     }
-
 
     // async function fetchApiForAllCartItems() {
     //     if (userData) {
