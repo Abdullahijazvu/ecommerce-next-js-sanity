@@ -28,7 +28,7 @@ const ProductDetail: FC<{ item: oneProductType }> = ({ item }) => {
     let dataToAddInCart = {
         product_id: item._id,
         quantity: quantity,
-        user_id: window.userid,
+        user_id: (window as any).userid,
         price: item.price
       };
       if(!isExists){

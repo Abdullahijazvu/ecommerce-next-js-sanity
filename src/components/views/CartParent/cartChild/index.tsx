@@ -96,7 +96,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                     }
             }
         }
-    }, [cartArray]);
+    }, [cartArray])
 
     async function handleDecrementByOne(product_id: string, price: any) {
         let stableQuantity: number = 0;
@@ -112,7 +112,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
             await dispatch("updateCart", {
                 product_id: product_id,
                 quantity: stableQuantity - 1,
-                user_id: window.userid,
+                user_id: (window as any).userid,
                 price: price
             });
             notificationError("Decremented by One")
@@ -131,7 +131,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
         await dispatch("updateCart", {
             product_id: product_id,
             quantity: stableQuantity + 1,
-            user_id: window.userid,
+            user_id: (window as any).userid,
             price:price
         });
         notificationError("Incremented by One");
@@ -172,7 +172,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                         <h2 className="md:text-2xl font-light text-gray-700">{item.productName}</h2>
                                         
                                         {loading ? <LoadingComp size={"w-10"} /> :
-                                            <div className="cursor-pointer" onClick={() => handleRemove(item._id, window.userid)}>
+                                            <div className="cursor-pointer" onClick={() => handleRemove(item._id, (window as any).userid)}>
                                                 <RiDeleteBin6Line size={28} />
                                             </div>
                                         }

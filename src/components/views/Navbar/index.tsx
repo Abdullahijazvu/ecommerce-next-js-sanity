@@ -22,14 +22,15 @@ const Navbar = () => {
     //         router.push(`/search/${searchQuery}`);
     //     }
     // }
+    
     useEffect(()=>{
     let user_id:any = window.localStorage.getItem('user_id');
     if(!user_id){
         user_id = uuidv4();
         window.localStorage.setItem('user_id',user_id);
     }
-    window.userid = user_id;
-    console.log('user_id: ', window.userid)
+    (window as any).userid = user_id;
+    console.log('user_id: ', (window as any).userid)
     },[])
 
     return (

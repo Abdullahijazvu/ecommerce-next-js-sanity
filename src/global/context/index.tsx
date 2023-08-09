@@ -36,12 +36,15 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
     }, [cartArray])
 
     async function fetchApiForAllCartItems() {
-        let res = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc?user_id=` + window.userid)
+        let res = await fetch(`${BASE_PATH_FORAPI}/api/cartfunc?user_id=` + (window as any).userid)
         if(!res.ok){
             throw new Error("Faild to fetch")
         }
         let datatoreturn = await res.json()
-        setCartArray(datatoreturn.allCartData)
+        setCartArray((prev:any)=>datatoreturn.allCartData)
+        if(datatoreturn){
+            return true
+        }
     }
 
     useEffect(() => {
@@ -76,12 +79,12 @@ const ContextWrapper = ({ children }: { children: ReactNode }) => {
             console.log("func running of update cart", NotData);
             // setLoading(false);
         }
-        // let resp = await fetchApiForAllCartItems();
-        // if (resp) {
-        //     return "Success"
-        // } else {
-        //     return "Unsuccess"
-        // }
+        let resp = await fetchApiForAllCartItems();
+        if (resp) {
+            return "Success"
+        } else {
+            return "Unsuccess"
+        }
         
         fetchApiForAllCartItems()
     }
