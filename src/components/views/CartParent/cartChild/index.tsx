@@ -93,6 +93,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                     let subTotalPrice = element.quantity * element.price
                     if(subTotalPrice){
                         setTotalPrice(totalPrice+subTotalPrice)
+                        router.refresh()
                     }
             }
         }
@@ -116,7 +117,6 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                 price: price
             });
             notificationError("Decremented by One")
-            PriceSubTotal()
         }
     }
     async function handleIncrementByOne(product_id: string, price: any) {
@@ -135,20 +135,18 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
             price:price
         });
         notificationError("Incremented by One");
-        PriceSubTotal()
     }
 
-    async function handleProcessCheckout() {
+    async function handleProcessCheckout() {      
         setLoadings(true);
-        let linkOrg: any = await fetch(`/api/checkout_sessions`, {
+        let linkOrg: any = await fetch(`${BASE_PATH_FORAPI}/api/checkout_sessions`, {
             method: "POST",
             body: JSON.stringify(allProductsForCart)
         })
-        if (linkOrg) {
-            let { link } = await linkOrg.json()
-            window.location.href = link
-        }
-        setLoadings(false);
+        let {link} = await linkOrg.json()
+            setLoadings(false);
+            console.log("linksdfdf", link);
+            window.location.href = link            
     }
 
     return (

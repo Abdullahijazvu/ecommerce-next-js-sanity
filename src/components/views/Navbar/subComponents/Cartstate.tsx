@@ -6,7 +6,7 @@ import { BsCart2 } from "react-icons/bs"
 const Cartstate = () => {
     let { cartArray } = useContext(cartContext);
     const [quantity, setQuantity] = useState(0)
-    const isBrowser = () => typeof window !== undefined
+    // const isBrowser = () => typeof window !== undefined
 
     useEffect(()=>{
         if(cartArray.length !== 0){
@@ -16,9 +16,11 @@ const Cartstate = () => {
             // let data = localStorage.getItem("cart") as string
         // console.log("Data: ", data);      
         // console.log("JSON Data: ", JSON.parse(data));
-    }, [])
+        console.log("mini cart", cartArray);
+        
+    }, [cartArray])
 
-    if(isBrowser()){
+    // if(isBrowser()){
         return (    
             <div className="flex-shrink-0 relative w-11 h-11 bg-gray-300 rounded-full flex items-center justify-center">
                 <div
@@ -29,7 +31,7 @@ const Cartstate = () => {
                 <BsCart2 size={24} />
             </div>
         )
-    }
+    // }
 }
 
 export default Cartstate
