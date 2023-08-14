@@ -14,14 +14,6 @@ import {v4 as uuidv4} from 'uuid'
 const Navbar = () => {
     const router = useRouter();
     const [isNavbarOpen, setNavbarOpen] = useState<boolean>(false);
-    // const [searchQuery, setSearchQuery] = useState("");
-
-
-    // function handleSerachCalledFunc(e: any) {
-    //     if (e.key === "Enter" && e.keyCode === 13) {
-    //         router.push(`/search/${searchQuery}`);
-    //     }
-    // }
     
     useEffect(()=>{
     let user_id:any = window.localStorage.getItem('user_id');
@@ -38,7 +30,7 @@ const Navbar = () => {
             <div className="sticky top-0 backdrop-blur-lg bg-gradient-to-tr from-white via-[#ffffffde] to-opacityDownColor z-20 max-w-7xl mx-auto px-4 md:px-10">
                 <div className="py-4 flex justify-between items-center gap-8">
                     <Link href="/" className="flex-shrink-0">
-                        <Image width={1000} height={1000} src={"/Logo.webp"} alt="Logo" layout="responsive"/>
+                        <Image width={1000} height={1000} src={"/logo3.png"} alt="Logo" layout="responsive"/>
                     </Link>
                     <div className="hidden lg:flex justify-between items-center w-full">
                         <ul className="flex space-x-4 font-medium text-lg text-purple-950">
@@ -49,14 +41,9 @@ const Navbar = () => {
                             ))}
                         </ul>
                         <div className="border flex items-center bg-white text-gray-600 pl-3 rounded-md" >
-                            {/* <Link href={`/search/${searchQuery}`}> */}
                                 <BiSearch />
-                                {/* </Link> */}
                             <input
                                 type="text"
-                                // value={searchQuery}
-                                // onKeyDown={handleSerachCalledFunc}
-                                // onChange={(e) => setSearchQuery(e.target.value)}
                                 className="focus:outline-none pl-1 pr-5 py-1 w-80 rounded-r-md"
                                 placeholder="Search in Our Store"
                             />

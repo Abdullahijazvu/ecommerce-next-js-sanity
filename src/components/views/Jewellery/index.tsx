@@ -1,4 +1,5 @@
 import Image from "next/image"
+import PImg from '/public/1_front.jpg'
 
 const Jewellery = () => {
     return (
@@ -34,7 +35,7 @@ const Jewellery = () => {
                 {/* right */}
                 <div className="flex flex-col lg:flex-row basis-1/2">
                     <div className="w-full px-4 lg:px-0 lg:w-80">
-                        <Image width={1000} height={1000} src={"https://full-stack-ecommerce-clothing-web.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature.1118a2f3.png&w=384&q=75"} alt={"Designer Jewellery"} />
+                        <Image width={1000} height={1000} src={PImg} alt={"Designer Jewellery"} />
                     </div>
                     <div className="space-y-6 md:space-y-4 p-6">
                         <p style={{wordSpacing:"0.8rem"}} className="h-[90%] lg:max-w-[15rem]">

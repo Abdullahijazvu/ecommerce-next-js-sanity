@@ -5,7 +5,6 @@ function checkerAndReturner(orgnalData: any, newData: any) {
             return element
         }
     }
-
 }
 
 export function cartReducer(state: any, action: any) {

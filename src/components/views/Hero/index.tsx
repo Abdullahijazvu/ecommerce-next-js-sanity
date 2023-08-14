@@ -1,4 +1,4 @@
-import heroGirlimg from '/public/header.webp'
+import frontimg from '/public/front3.jpg'
 import { BsCart2 } from "react-icons/bs"
 import Image from "next/image"
 import Link from 'next/link'
@@ -9,7 +9,7 @@ const Hero = () => {
     return (
         <div className="py-5 flex justify-between items-center px-2">
             {/* right side */}
-            <div className="space-y-6 max-w-sm">
+            <div className="space-y-6 max-w-2xl mr-5">
                 <button
                     aria-label="redirect the user to sale page"
                     className="rounded-md bg-primaryWhite text-blue-700 font-medium px-4 py-2"
@@ -44,10 +44,9 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-
             {/* left side */}
-            <div className="hidden md:flex bg-primaryWhite rounded-full">
-                <Image src={heroGirlimg} alt="heroimg" />
+            <div className="hidden md:flex bg-primaryWhite">
+                <Image src={frontimg} alt="heroimg" />
             </div>
         </div>
     )

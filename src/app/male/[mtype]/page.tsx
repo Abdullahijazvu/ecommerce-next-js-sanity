@@ -15,8 +15,6 @@ async function fetchAllProductsData() {
 
     return res.json();
 }
-
-
 const Male = async ({ params }: { params: { ftype: string } }) => {
     let res: responseType = await fetchAllProductsData();
     return (
