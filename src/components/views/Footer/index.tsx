@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="container px-5 py-12 mx-auto flex md:items-start text-start  lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
                 <div className="space-y-6 w-80 flex-shrink-0 md:mx-0 mx-auto text-start md:text-left">
                     <Link href={"/"} className="flex title-font font-medium items-start md:justify-start justify-start text-gray-900">
-                        <Image width={150} height={150} src={"/Logo3.png"} alt="Logo" />
+                        <Image width={150} height={150} src={"/logo3.png"} alt="Logo" />
                     </Link>
                     <p className="mt-2">Small, artisan label that offers a thoughtfully curated collection of high quality everyday essentials made.</p>
                 </div>

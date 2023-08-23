@@ -2,7 +2,7 @@
 import BASE_PATH_FORAPI from "@/components/shared/Wrapper/BasePath";
 import { oneProductType } from "@/components/utils/ProductsDataArrayAndType"
 import { Component } from "react"
-// import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroll-component";
 import CardAll from "../CardAll";
 
 interface propsType {
@@ -41,18 +41,7 @@ export default class AllProductsCompo extends Component<{ ProdutcData: propsType
     render() {
         return (
             <div 
-            className="grid grid-cols-2 md:grid-cols-3 py-10 lg:grid-cols-4 gap-4"
-                // dataLength={this.state.items.length}
-                // next={this.getData}
-                // hasMore={this.state.hasMore}
-                // loader={<h4>Loading...</h4>}
-                // endMessage={
-                //     <p style={{ textAlign: 'center' }}>
-                //         <b>Yay! You have seen it all</b>
-                //     </p>
-                // }
-                // className="content-center justify-center grid grid-cols-2 md:grid-cols-3 py-10 lg:grid-cols-4 gap-4"
-            >
+            className="grid grid-cols-2 md:grid-cols-3 py-10 lg:grid-cols-4 gap-4">
                 {this.state.items.map((item: oneProductType, index: number) => (
                     <CardAll key={index} singleProductData={item} />
                 ))}

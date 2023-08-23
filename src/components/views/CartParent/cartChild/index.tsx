@@ -78,7 +78,7 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
         dispatch("removeFromCart", { product_id, user_id });
     }
     useEffect(() => {
-        if (cartArray.length !== 0 ) {
+        if (cartArray) {
             let data = allProductsOfStore.filter((item: oneProductType) => {
                 for (let index = 0; index < cartArray.length; index++) {
                     let element: any = cartArray[index];
@@ -212,30 +212,25 @@ const CartComp = ({ allProductsOfStore }: { allProductsOfStore: Array<oneProduct
                                 </div>
                             </div>
                         )
-                    } )}
-                        {/* // !userData ? (
-                        //     <div className="text-center font-semibold text-gray-800 text-xl">Please login First</div>
-                        // )  */}
-                        
-                           {!emptyCart && !allProductsForCart && arrayForLoading.map((index: number) => (
-                                <div key={index} className="border border-blue-300 shadow rounded-md p-4 w-full mx-auto">
-                                    <div className="flex animate-pulse gap-4">
-                                        <div className="bg-slate-200 rounded-lg h-32 w-4/12"></div>
-                                        <div className="flex-1 space-y-6 py-1">
-                                            <div className="grid grid-cols-3 gap-4">
-                                                <div className="h-2 bg-slate-200 rounded col-span-2"></div>
-                                                <div className="h-2 bg-slate-200 rounded col-span-1"></div>
-                                            </div>
-                                            <div className="space-y-3">
-                                                <div className="h-2 bg-slate-200 rounded"></div>
-                                                <div className="h-2 bg-slate-200 rounded"></div>
-                                            </div>
-                                            <div className="h-8 w-16 bg-slate-200 rounded"></div>
-                                        </div>
+                    } )}                        
+                    {!emptyCart && !allProductsForCart && arrayForLoading.map((index: number) => (
+                        <div key={index} className="border border-blue-300 shadow rounded-md p-4 w-full mx-auto">
+                            <div className="flex animate-pulse gap-4">
+                                <div className="bg-slate-200 rounded-lg h-32 w-4/12"></div>
+                                <div className="flex-1 space-y-6 py-1">
+                                    <div className="grid grid-cols-3 gap-4">
+                                        <div className="h-2 bg-slate-200 rounded col-span-2"></div>
+                                        <div className="h-2 bg-slate-200 rounded col-span-1"></div>
                                     </div>
+                                    <div className="space-y-3">
+                                        <div className="h-2 bg-slate-200 rounded"></div>
+                                        <div className="h-2 bg-slate-200 rounded"></div>
+                                    </div>
+                                    <div className="h-8 w-16 bg-slate-200 rounded"></div>
                                 </div>
-                            ))
-                        }
+                            </div>
+                        </div>))
+                    }
                 </div>
                 {!emptyCart &&
                 <div className="basis-1/4 space-y-6 px-6">
