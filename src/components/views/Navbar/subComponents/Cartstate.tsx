@@ -14,12 +14,12 @@ const Cartstate = () => {
         }
             // setQuantity(JSON.parse(data)?.length ? JSON.parse(data)?.length : 0 )
             // let data = localStorage.getItem("cart") as string
-        // console.log("Data: ", data);      
+        // console.log("Data: ", data);
         // console.log("JSON Data: ", JSON.parse(data));
         console.log("mini cart", cartArray);
         
     }, [cartArray])
-
+    console.log(quantity)
     // if(isBrowser()){
         return (    
             <div className="flex-shrink-0 relative w-11 h-11 bg-gray-300 rounded-full flex items-center justify-center">
