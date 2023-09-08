@@ -14,6 +14,12 @@ import {v4 as uuidv4} from 'uuid'
 const Navbar = () => {
     const router = useRouter();
     const [isNavbarOpen, setNavbarOpen] = useState<boolean>(false);
+
+    const closeNavbarOnDesktop = () => {
+        if (window.innerWidth >= 768) { // Adjust the breakpoint as needed
+            setNavbarOpen(false);
+        }
+    };
     
     useEffect(()=>{
     let user_id:any = window.localStorage.getItem('user_id');
@@ -22,7 +28,13 @@ const Navbar = () => {
         window.localStorage.setItem('user_id',user_id);
     }
     (window as any).userid = user_id;
-    console.log('user_id: ', (window as any).userid)
+    console.log('user_id: ', (window as any).userid);
+    window.addEventListener('resize', closeNavbarOnDesktop);
+
+        return () => {
+            // Remove the event listener when the component unmounts
+            window.removeEventListener('resize', closeNavbarOnDesktop);
+        };
     },[])
 
     return (
@@ -76,26 +88,17 @@ export default Navbar
 const MobileNavbar = () => {
     return (
         <div className="w-full px-6 py-4 bg-gray-100">
+                <ul className='dropdown-menu'>
             {
                 NavbarArray.map((item: NavbarItemType, index: number) => {
                     return (
-                        <ul className='dropdown-menu' key={index}>
-                            <li>
-                                <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/female/Female">Female</a>
+                            <li key={index}>
+                                <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href={item.href}>{item.label}</a>
                             </li>
-                            <li>
-                                <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/male/Male">Male</a>
-                            </li>
-                            <li>
-                                <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/kids">Kids</a>
-                            </li>
-                            <li>
-                                <a className="text-gray-600 hover:text-gray-800 cursor-pointer" href="/products">All Products</a>
-                            </li>
-                      </ul>
                     )
                 })
             }
+            </ul>
         </div>
     )
 }
